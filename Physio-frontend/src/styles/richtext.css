@@ -1,0 +1,190 @@
+.rich-text-content {
+  line-height: 1.6;
+  color: inherit;
+}
+
+.rich-text-content h1,
+.rich-text-content h2,
+.rich-text-content h3,
+.rich-text-content h4,
+.rich-text-content h5,
+.rich-text-content h6 {
+  font-weight: 600;
+  margin: 0.5em 0;
+  line-height: 1.3;
+}
+
+.rich-text-content h1 { font-size: 1.8em; }
+.rich-text-content h2 { font-size: 1.5em; }
+.rich-text-content h3 { font-size: 1.3em; }
+.rich-text-content h4 { font-size: 1.1em; }
+.rich-text-content h5 { font-size: 1em; }
+.rich-text-content h6 { font-size: 0.9em; }
+
+.rich-text-content p {
+  margin: 0.5em 0;
+}
+
+.rich-text-content p:first-child {
+  margin-top: 0;
+}
+
+.rich-text-content p:last-child {
+  margin-bottom: 0;
+}
+
+.rich-text-content strong,
+.rich-text-content b {
+  font-weight: 700;
+}
+
+.rich-text-content em,
+.rich-text-content i {
+  font-style: italic;
+}
+
+.rich-text-content u {
+  text-decoration: underline;
+}
+
+.rich-text-content s,
+.rich-text-content strike {
+  text-decoration: line-through;
+}
+
+.rich-text-content ul,
+.rich-text-content ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.rich-text-content ul {
+  list-style-type: disc;
+}
+
+.rich-text-content ol {
+  list-style-type: decimal;
+}
+
+.rich-text-content li {
+  margin: 0.25em 0;
+}
+
+.rich-text-content ul ul,
+.rich-text-content ol ol,
+.rich-text-content ul ol,
+.rich-text-content ol ul {
+  margin: 0.25em 0;
+}
+
+.rich-text-content a {
+  color: #3b82f6;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.rich-text-content a:hover {
+  color: #1d4ed8;
+}
+
+.rich-text-content br {
+  line-height: 1.6;
+}
+
+.rich-text-content div {
+  margin: 0;
+}
+
+.rich-text-content span {
+  display: inline;
+}
+
+/* Font tag support for colors */
+.rich-text-content font {
+  display: inline;
+}
+
+.rich-text-content font[color] {
+  /* Color attribute will be applied directly */
+}
+
+/* Text alignment classes */
+.rich-text-content [style*="text-align: left"] {
+  text-align: left;
+}
+
+.rich-text-content [style*="text-align: center"] {
+  text-align: center;
+}
+
+.rich-text-content [style*="text-align: right"] {
+  text-align: right;
+}
+
+.rich-text-content [style*="text-align: justify"] {
+  text-align: justify;
+}
+
+/* Enhanced color support */
+.rich-text-content [style*="color:"] {
+  /* Colors will be preserved from inline styles - no override */
+}
+
+.rich-text-content [style*="background-color:"] {
+  padding: 0.1em 0.2em;
+  border-radius: 0.2em;
+  /* Background colors will be preserved from inline styles */
+}
+
+/* Ensure inline styles take precedence */
+.rich-text-content * {
+  /* Allow all inline styles to work properly */
+}
+
+/* Support for legacy font tags with color attribute */
+.rich-text-content font[color="red"] { color: red !important; }
+.rich-text-content font[color="blue"] { color: blue !important; }
+.rich-text-content font[color="green"] { color: green !important; }
+.rich-text-content font[color="yellow"] { color: yellow !important; }
+.rich-text-content font[color="orange"] { color: orange !important; }
+.rich-text-content font[color="purple"] { color: purple !important; }
+.rich-text-content font[color="pink"] { color: pink !important; }
+.rich-text-content font[color="black"] { color: black !important; }
+.rich-text-content font[color="white"] { color: white !important; }
+.rich-text-content font[color="gray"] { color: gray !important; }
+.rich-text-content font[color="grey"] { color: grey !important; }
+
+/* Support for hex colors in font tags */
+.rich-text-content font[color^="#"] {
+  /* Hex colors will be applied directly through the color attribute */
+}
+
+/* Better highlight support */
+.rich-text-content [style*="background-color: yellow"] {
+  background-color: yellow !important;
+  padding: 0.1em 0.2em;
+  border-radius: 0.2em;
+}
+
+.rich-text-content [style*="background-color: #"] {
+  padding: 0.1em 0.2em;
+  border-radius: 0.2em;
+}
+
+@media (max-width: 640px) {
+  .rich-text-content {
+    font-size: 0.9em;
+  }
+  
+  .rich-text-content h1 { font-size: 1.6em; }
+  .rich-text-content h2 { font-size: 1.4em; }
+  .rich-text-content h3 { font-size: 1.2em; }
+  .rich-text-content h4 { font-size: 1.05em; }
+  .rich-text-content h5 { font-size: 0.95em; }
+  .rich-text-content h6 { font-size: 0.85em; }
+  
+  .rich-text-content ul,
+  .rich-text-content ol {
+    padding-left: 1.2em;
+  }
+} 

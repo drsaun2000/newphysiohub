@@ -1,0 +1,655 @@
+/* Flashcard Container */
+.card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin-bottom: 20px;
+  border: none;
+}
+
+.flashcard-container {
+  perspective: 1000px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: none;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.flashcard-container:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.4s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.flashcard-container.flipped .flashcard-inner {
+  transform: rotateX(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+  background-color: #f8f9fa;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.flashcard-back {
+  transform: rotateX(180deg);
+}
+
+/* Button Styles */
+.round-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.round-button:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Shuffle button active state */
+.round-button.bg-purple-100 {
+  background-color: #f3e8ff;
+  border: 1px solid #e9d5ff;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+}
+
+.round-button.bg-purple-100:hover {
+  background-color: #ede9fe;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+}
+
+.pill-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.pill-button:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pill-button .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.pill-button .text {
+  font-weight: 500;
+}
+
+/* Hint Button */
+.hint-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.hint-btn:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.speak-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.speak-button:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hint-icon {
+  width: 16px;
+  height: 16px;
+  color: #8b5cf6;
+}
+
+.speak-icon {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}
+
+.hint-text {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Tooltip Styles */
+.tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.219);
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(100, 100, 100);
+  white-space: nowrap;
+  z-index: 60;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  transform: translateX(-50%) ;
+}
+
+/* Arrow for tooltip */
+.tooltip:before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background-color: #f8f9fa;
+}
+
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip-container:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Adjust position for right-aligned tooltips to prevent cutoff */
+.absolute.top-5.right-5 .tooltip-container .tooltip {
+  left: auto;
+  right: 0;
+  transform: translateX(0) ;
+}
+
+.absolute.top-5.left-5 .tooltip-container .tooltip {
+  left: 0;
+  right: auto;
+  transform: translateX(0) ;
+}
+
+.absolute.top-5.right-5 .tooltip-container .tooltip:before {
+  left: auto;
+  right: 12px;
+  transform: rotate(45deg);
+}
+
+.absolute.top-5.left-5 .tooltip-container .tooltip:before {
+  left: 12px;
+  right: auto;
+  transform: rotate(45deg);
+}
+
+.absolute.top-5.right-5 .tooltip-container:hover .tooltip {
+  transform: translateX(0) translateY(0);
+}
+
+.absolute.top-5.left-5 .tooltip-container:hover .tooltip {
+  transform: translateX(0) translateY(0);
+}
+
+/* Star Button Tooltip */
+.star-tooltip {
+  min-width: 120px;
+  text-align: center;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 0;
+}
+
+/* Only show buttons on the active side */
+.flashcard-container.flipped .flashcard-front-buttons {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.flashcard-container:not(.flipped) .flashcard-back-buttons {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Confidence Buttons */
+.confidence-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 100px;
+  justify-content: center;
+}
+
+.confidence-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.confidence-btn.low.active {
+  background-color: #EF4444;
+  color: white;
+  border-color: #EF4444;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.confidence-btn.medium.active {
+  background-color: #F59E0B;
+  color: white;
+  border-color: #F59E0B;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.confidence-btn.high.active {
+  background-color: #10B981;
+  color: white;
+  border-color: #10B981;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.previous-btn {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1.5px solid #E2E8F0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.previous-btn:hover:not(:disabled) {
+  background-color: #f7f7f7;
+}
+
+.nav-btn {
+  background-color: #8B5CF6;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.nav-btn:hover:not(:disabled) {
+  background-color: #7C3AED;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+}
+
+/* Rating */
+.rating-stars {
+  display: flex;
+  align-items: center;
+}
+
+.ratings-count {
+  font-size: 12px;
+  color: #9CA3AF;
+  text-align: right;
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* View All Button */
+.view-all-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  color: #374151;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.view-all-btn:hover {
+  background-color: #f3f4f6;
+}
+
+/* Dashboard Button */
+.dashboard-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  border: none;
+  color: #6b7280;
+  margin-right: 16px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.dashboard-btn:hover {
+  transform: translateX(-2px);
+}
+
+/* Progress Bar Container */
+.progress-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Card Label Styles */
+.card-label {
+  font-size: 11px;
+  color: #9CA3AF;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+}
+
+/* Flashcard Content Area */
+.flashcard-content {
+  background: #f8f9fa;
+  border-radius: 15px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  position: relative;
+}
+
+.flashcard-content.back {
+  background: #f8f9fa;
+}
+
+/* Navigation Controls */
+.navigation-controls {
+  background: white;
+  border-radius: 20px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: none;
+  margin-top: 16px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .pill-button .text {
+    display: none;
+  }
+  
+  .pill-button {
+    padding: 10px 12px;
+  }
+  
+  .card {
+    padding: 20px;
+    margin-bottom: 16px;
+    border-radius: 20px;
+  }
+  
+  .button-group {
+    gap: 8px;
+  }
+  
+  .confidence-btn {
+    padding: 10px 16px;
+    min-width: 80px;
+    font-size: 13px;
+    border-radius: 20px;
+  }
+  
+  .nav-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+    border-radius: 20px;
+  }
+  
+  .flashcard-container {
+    border-radius: 20px;
+  }
+  
+  .flashcard-content {
+    height: 300px;
+    padding: 24px;
+    border-radius: 15px;
+  }
+}
+
+/* Focus Mode Styles */
+.focus-mode-card {
+  background: rgb(238, 238, 238);
+  border-radius: 24px;
+}
+
+.focus-mode-card .flashcard-content {
+  font-size: 1.15em;
+  margin-top: 60px;
+  border-radius: 20px;
+  position: relative;
+}
+
+.focus-mode-card .flashcard-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+@keyframes focusModeEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes focusModePulse {
+  0%, 100% {
+    box-shadow: 0 12px 48px rgba(139, 92, 246, 0.15);
+  }
+  50% {
+    box-shadow: 0 16px 64px rgba(139, 92, 246, 0.2);
+  }
+}
+
+.focus-mode-card {
+  animation: focusModeEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus-controls {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 12px 48px rgba(139, 92, 246, 0.15);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.focus-controls:hover {
+  box-shadow: 0 16px 64px rgba(139, 92, 246, 0.2);
+}
+
+.focus-controls .focus-nav-btn {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8B5CF6;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  padding: 10px 20px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.focus-controls .focus-nav-btn:hover:not(:disabled) {
+  background: #8B5CF6;
+  color: white;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+}
+
+.focus-controls .focus-nav-btn:disabled {
+  background: rgba(156, 163, 175, 0.1);
+  color: #9CA3AF;
+  border-color: rgba(156, 163, 175, 0.2);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.focus-controls .focus-exit-btn {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+}
+
+.focus-controls .focus-exit-btn:hover {
+  background: linear-gradient(135deg, #DC2626, #B91C1C);
+  box-shadow: 0 6px 24px rgba(239, 68, 68, 0.4);
+}
+
+.focus-controls .card-counter {
+  color: #6B7280;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  background: rgba(139, 92, 246, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+@media (max-width: 768px) {
+  .focus-mode-card {
+    padding: 20px;
+    margin: 16px;
+    border-radius: 20px;
+  }
+  
+  .focus-mode-card .flashcard-content {
+    padding: 32px 24px;
+    font-size: 1.1em;
+  }
+  
+  .focus-controls {
+    padding: 12px 16px;
+    gap: 12px;
+    border-radius: 20px;
+    margin: 0 16px;
+  }
+  
+  .focus-controls .focus-nav-btn,
+  .focus-controls .focus-exit-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+}

@@ -1,0 +1,41 @@
+.swiper-wrapper {
+    height: fit-content !important;
+}
+
+.swiper-pagination {
+    display: flex;
+    justify-content: flex-start;
+    gap: 6px;
+    position: relative !important;
+    margin-top: 2rem;
+    bottom: 0;
+}
+
+.swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #ffffff !important;
+    transform: scale(1.1);
+}
+
+@keyframes rise-fall {
+    0%,
+    100% {
+        transform: scaleY(0);
+    }
+
+    50% {
+        transform: scaleY(1);
+    }
+}
+
+.animate-bar {
+    animation: rise-fall 2s infinite ease-in-out;
+    transform-origin: bottom;
+}
