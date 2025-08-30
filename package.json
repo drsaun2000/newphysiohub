@@ -1,0 +1,16 @@
+{
+  "name": "physiohub-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd Physio-frontend && npm install && npm run build",
+    "start": "cd Physio-frontend && npm start",
+    "dev": "cd Physio-frontend && npm run dev",
+    "install-all": "cd Physio-Backend && npm install && cd ../Physio-frontend && npm install && cd ../physio-admin && npm install"
+  },
+  "workspaces": [
+    "Physio-Backend",
+    "Physio-frontend", 
+    "physio-admin"
+  ]
+}

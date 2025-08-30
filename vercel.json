@@ -1,6 +1,0 @@
-{
-  "buildCommand": "cd Physio-frontend && npm run build",
-  "devCommand": "cd Physio-frontend && npm run dev",
-  "installCommand": "cd Physio-frontend && npm install",
-  "outputDirectory": "Physio-frontend/.next"
-}
